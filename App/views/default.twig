@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <!-- Meta -->
+    <meta name="charset" content="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+
+    {% if block("meta") is defined %}
+        {{ block('meta') }}
+    {% endif %}
+
+    <title>Your site name | {{ title }} </title>
+
+    <link rel="stylesheet" href="/dist/css/app.css">
+    {% if block("style") is defined %}
+        {{ block('style') }}
+    {% endif %}
+</head>
+<body>
+
+<!-- CONTENT -->
+<div class="content">
+    {{ block('content') }}
+</div>
+<!-- fin CONTENT -->
+
+<script src="/dist/js/app.min.js"></script>
+{% if block("scripts") is defined %}
+    {{ block('scripts') }}
+{% endif %}
+<!-- Fin Js -->
+
+</body>
+</html>

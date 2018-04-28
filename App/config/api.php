@@ -8,5 +8,8 @@ return [
 		'username' => getenv('WORDPRESS_USERNAME'),
 		'password' => getenv('WORDPRESS_PASSWORD'),
 		'author_id' => getenv('WORDPRESS_DEFAULT_AUTHOR_ID')
+	],
+	"webhook" => [
+		'token' => getenv('WEBHOOK_TOKEN')
 	]
 ];

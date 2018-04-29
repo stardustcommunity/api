@@ -19,16 +19,38 @@ class WebHooksYoutubeController extends Controller
 	 */
 	public function newVideo(ServerRequestInterface $request, ResponseInterface $response, Logger $logger, Client $client)
 	{
-		$id = $request->getParsedBody()->entry->id;
-		$youTubeResponse = $client->get("https://www.googleapis.com/youtube/v3/videos?id={$id}&part=snippet%2CcontentDetails%2Cstatistics&key={$this->container->get('google')['api_key']}");
+		if(is_a($request->getParsedBody(), \SimpleXMLElement::class)){
+			$id = $request->getParsedBody()->entry->id;
+			$youTubeResponse = $client->get("https://www.googleapis.com/youtube/v3/videos?id={$id}&part=snippet%2CcontentDetails%2Cstatistics&key={$this->container->get('google')['api_key']}");
+			$youTubeResponseParsed = \json_decode($youTubeResponse->getBody()->getContents());
+			if (isset($youTubeResponseParsed->items[0])) {
+				//send a log
+				$logger->info("New video from \"{$youTubeResponseParsed->items[0]->snippet->channelTitle}\" : https://youtu.be/{$id}");
 
-		$youTubeResponseParsed = \json_decode($youTubeResponse->getBody()->getContents())->items[0];
-		//send a log
-		$logger->info("New video from \"{$youTubeResponseParsed->snippet->channelTitle}\" : https://youtu.be/{$id}");
-//		echo $request->getParsedBody()->entry->id;
-
-		return $response->withJson([
-			'success' => true
-		]);
+				return $response->withJson([
+					'success' => true
+				]);
+			}else{
+				return $response->withStatus(404)->withJson([
+					'success' => false,
+					'errors' => [
+						[
+							'code' => 'unknown_youtube_id',
+							'message' => 'Unknown youtube id'
+						]
+					]
+				]);
+			}
+		}else{
+			return $response->withStatus(400)->withJson([
+				'success' => false,
+				'errors' => [
+					[
+						'code' => 'invalid_body',
+						'message' => 'Body must be an xml object'
+					]
+				]
+			]);
+		}
 	}
 }

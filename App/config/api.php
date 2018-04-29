@@ -11,5 +11,8 @@ return [
 	],
 	"webhook" => [
 		'token' => getenv('WEBHOOK_TOKEN')
+	],
+	"radionomy" => [
+		'radio_uid' => "f23a1d32-55ac-4a84-b224-7dd213d42814"
 	]
 ];

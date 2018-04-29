@@ -33,6 +33,7 @@
         "lefuturiste/Slim-Bridge": "^1.0.5",
         "doctrine/cache": "^1.7",
         "lefuturiste/validator": "^1.0",
-        "paragonie/constant_time_encoding": "^2.2"
+        "paragonie/constant_time_encoding": "^2.2",
+        "laravie/parser": "^1.2"
     }
 }

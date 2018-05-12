@@ -1,4 +1,6 @@
-# Slim3 template
+# Api
+
+The api is the main hub of all services 
 
 This is simple template of slimframework 3 and integrations of others php librarys.
 
@@ -6,7 +8,9 @@ This is simple template of slimframework 3 and integrations of others php librar
 
 Just run a:
 
-`composer create-project lefuturiste/slim3-template`
+`composer create-project lefuturiste/slim3-template-api`
+
+Create a .env file in the root directory and fill it with env vars fields (you can get the list of the fields in .env.example)
 
 ## The console
 
@@ -28,17 +32,3 @@ Maintenance mode is made for rename index.php file in web root directory (public
 
 - php console maintenance open -> for enable maintenance mode
 - php console maintenance close -> for disable maintenance mode
-
-## Assets compiling
-
-This template include gulpfile.js 
-
-### Sass compiling with bourbon and live reload
-
-```gulp sass```
-```gulp sass:watch```
-
-### Compile and minify many js file in once file
-
-```gulp concat-scripts```
-```gulp minify-scripts```
